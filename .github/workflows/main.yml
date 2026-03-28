@@ -27,6 +27,8 @@ jobs:
 
       - name: Build Storybook
         run: npm run build-storybook
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4

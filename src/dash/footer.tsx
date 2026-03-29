@@ -4,6 +4,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { SocialIcons, SocialIconsProps } from "../components/social-icons";
 import { haveSocialIconsProps } from "../utils/have-social-icons-props";
 
@@ -28,6 +30,9 @@ export function Footer({
   socialIconsText,
   ...socialIconsProps
 }: FooterProps) {
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up(1600));
+
   return (
     <footer
       style={{
@@ -35,47 +40,51 @@ export function Footer({
         color,
       }}
     >
-      {haveSocialIconsProps(socialIconsProps) && (
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          paddingY={4}
-        >
-          {socialIconsText && (
-            <Typography component="span" variant="overline">
-              {socialIconsText}
-            </Typography>
-          )}
-          <SocialIcons {...socialIconsProps} />
-        </Box>
-      )}
-      <nav>
-        <Tabs
-          variant="scrollable"
-          scrollButtons="on"
-          arial-label={itemsAriaLabel}
-          value={false}
-        >
-          {items.map((item) =>
-            "href" in item ? (
-              <Link href={item.href} passHref key={`${item.key}-footer-item`}>
-                <Tab component="a" tabIndex={0} label={item.label} />
-              </Link>
-            ) : (
-              <Tab
-                tabIndex={0}
-                key={`${item.key}-footer-item`}
-                label={item.label}
-                onClick={item.onClick}
-                style={{
-                  cursor: "pointer",
-                }}
-              />
-            )
-          )}
-        </Tabs>
-      </nav>
+      <Box maxWidth={isLargeScreen ? "1140px" : "960px"} margin="auto">
+        {haveSocialIconsProps(socialIconsProps) && (
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            paddingY={4}
+          >
+            {socialIconsText && (
+              <Typography component="span" variant="overline">
+                {socialIconsText}
+              </Typography>
+            )}
+            <SocialIcons {...socialIconsProps} />
+          </Box>
+        )}
+        <nav>
+          <Tabs
+            variant="scrollable"
+            scrollButtons="on"
+            arial-label={itemsAriaLabel}
+            value={false}
+            centered
+            centerRipple
+          >
+            {items.map((item) =>
+              "href" in item ? (
+                <Link href={item.href} passHref key={`${item.key}-footer-item`}>
+                  <Tab component="a" tabIndex={0} label={item.label} />
+                </Link>
+              ) : (
+                <Tab
+                  tabIndex={0}
+                  key={`${item.key}-footer-item`}
+                  label={item.label}
+                  onClick={item.onClick}
+                  style={{
+                    cursor: "pointer",
+                  }}
+                />
+              ),
+            )}
+          </Tabs>
+        </nav>
+      </Box>
     </footer>
   );
 }

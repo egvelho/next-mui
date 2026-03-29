@@ -41,14 +41,14 @@ export function Page({
       <Box
         paddingTop={isDesktop ? 8 : 2}
         paddingBottom={overHeader ? 24 : undefined}
-        paddingRight={isDesktop ? 6 : 2}
-        paddingLeft={isDesktop ? (isLargeScreen ? 24 : 20) : 2}
+        paddingRight={isDesktop ? 8 : 2}
+        paddingLeft={isDesktop ? 8 : 2}
         color={
           color || (backgroundIsDark ? theme.palette.common.white : undefined)
         }
         style={{ background: background || backgroundFallback }}
       >
-        <Box maxWidth={isLargeScreen ? "1140px" : "960px"}>
+        <Box maxWidth={isLargeScreen ? "1140px" : "960px"} margin="auto">
           <Box paddingBottom={overHeader ? undefined : isDesktop ? 8 : 2}>
             {header}
           </Box>
@@ -63,10 +63,11 @@ export function Page({
         style={{
           background: pageBackground,
         }}
+        paddingRight={isDesktop ? 8 : 2}
+        paddingLeft={isDesktop ? 8 : 2}
       >
         <Box
-          marginRight={{ xs: 2, sm: 2, md: 6 }}
-          marginLeft={isDesktop ? (isLargeScreen ? 30 : 20) : 2}
+          marginX="auto"
           marginTop={overHeader ? -20 : undefined}
           maxWidth={isLargeScreen ? "1140px" : "960px"}
         >

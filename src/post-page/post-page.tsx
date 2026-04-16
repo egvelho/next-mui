@@ -76,7 +76,14 @@ export function PostPage({
   return (
     <Page {...pageProps} header={<PostInfo {...postInfoProps} />}>
       <Box maxWidth={isLargeScreen ? "960px" : "720px"}>
-        <Box>{children}</Box>
+        <Box
+          style={{
+            overflowWrap: "break-word",
+            wordBreak: "break-word",
+          }}
+        >
+          {children}
+        </Box>
         <Box marginTop={3}>
           <PostSuggestions
             {...postSuggestionsProps}
